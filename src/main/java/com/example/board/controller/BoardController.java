@@ -30,6 +30,11 @@ public class BoardController {
     return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
   }
 
+  @PutMapping("/{board-id}")
+  public ResponseEntity<BoardVO> updateBoard(@PathVariable(name = "board-id") Long boardId) {
+    return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+  }
+
 
 
 }
