@@ -12,12 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor // 필드 전체를 가지고 있는 생성자
 public class BoardVO {
 
+  private Long boardId;
   private LocalDate createTime;
   private LocalDate updateTime;
   private String subject;
   private String content;
 
   public BoardVO(Board board) {
+    this.boardId = board.getId();
     this.createTime = board.getCreatedAt();
     this.updateTime = board.getModifiedAt();
     this.subject = board.getSubject();
