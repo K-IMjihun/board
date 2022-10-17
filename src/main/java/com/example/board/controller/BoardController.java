@@ -35,6 +35,11 @@ public class BoardController {
     return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
   }
 
+  @DeleteMapping("/{board-id}")
+  public ResponseEntity<Void> deleteBoard(@PathVariable(name = "board-id") Long boardId) {
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+  }
+
 
 
 }
