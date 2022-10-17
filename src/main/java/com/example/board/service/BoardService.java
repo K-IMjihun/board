@@ -32,7 +32,7 @@ public class BoardService {
   }
 
   public List<BoardVO> searchBoard(BoardSearchDTO dto) {
-    List<Board> boards = boardRepository.findAllSubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
+    List<Board> boards = boardRepository.findAllBySubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
         dto.getSubject(), dto.getContent(), dto.getUpdateDateTime());
 
     return boards.stream().map(BoardVO::new)
