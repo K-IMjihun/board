@@ -25,6 +25,13 @@ public class BoardController {
     return new ResponseEntity<>(vo, HttpStatus.CREATED);
   }
 
+  @GetMapping("/{board-id}")
+  public ResponseEntity<BoardVO> getBoard(@PathVariable(name = "board-id") Long boardId) {
+    BoardVO vo = boardService.getBoard(boardId);
+    return new ResponseEntity<>(vo, HttpStatus.ACCEPTED);
+  }
+
+  // 미완성
   @GetMapping("list")
   public ResponseEntity<List<BoardVO>> searchBoard(BoardSearchDTO dto) {
     List<BoardVO> vo = boardService.searchBoard(dto);
