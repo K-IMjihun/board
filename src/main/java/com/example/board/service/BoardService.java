@@ -31,6 +31,14 @@ public class BoardService {
     return new BoardVO(board);
   }
 
+  public BoardVO getBoard(Long boardId) {
+    Board board = boardRepository.findById(boardId)
+        .orElseThrow(() -> new RuntimeException("board not found"));
+
+    return new BoardVO(board);
+  }
+
+  // 미완성
   public List<BoardVO> searchBoard(BoardSearchDTO dto) {
     List<Board> boards = boardRepository.findAllBySubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
         dto.getSubject(), dto.getContent(), dto.getUpdateDateTime());
