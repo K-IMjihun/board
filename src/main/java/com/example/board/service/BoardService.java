@@ -6,13 +6,16 @@ import com.example.board.domain.Board;
 import com.example.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class BoardService {
 
   @Autowired
   private BoardRepository boardRepository;
 
+  @Transactional
   public BoardVO insertBoard(BoardUpdateDTO dto) {
     Board board = Board.builder()
         .subject(dto.getSubject())
@@ -24,6 +27,7 @@ public class BoardService {
     return new BoardVO(board);
   }
 
+  @Transactional
   public BoardVO updateBoard(Long boardId, BoardUpdateDTO dto) {
 
     Board board = boardRepository.findById(boardId)
@@ -35,6 +39,7 @@ public class BoardService {
     return new BoardVO(board);
   }
 
+  @Transactional
   public void deleteBoard(Long boardId) {
     if (boardRepository.findById(boardId).isEmpty()) {
       throw new RuntimeException("borad not found");
