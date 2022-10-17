@@ -3,6 +3,7 @@ package com.example.board.controller;
 import com.example.board.controller.dto.BoardInsertDTO;
 import com.example.board.controller.dto.BoardSearchDTO;
 import com.example.board.controller.vo.BoardVO;
+import com.example.board.domain.Board;
 import com.example.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class BoardController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardInsertDTO dto) {
-
-    return new ResponseEntity<>(null, HttpStatus.CREATED);
+    BoardVO vo = boardService.insertBoard(dto);
+    return new ResponseEntity<>(vo, HttpStatus.CREATED);
   }
 
   @GetMapping("list")
