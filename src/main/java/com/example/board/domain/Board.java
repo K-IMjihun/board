@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 @Builder
 public class Board extends BaseTimeEntity {
 
+  @Setter
   private String subject;
+  @Setter
   private String content;
 
 }

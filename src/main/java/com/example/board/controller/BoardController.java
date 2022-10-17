@@ -1,9 +1,8 @@
 package com.example.board.controller;
 
-import com.example.board.controller.dto.BoardInsertDTO;
+import com.example.board.controller.dto.BoardUpdateDTO;
 import com.example.board.controller.dto.BoardSearchDTO;
 import com.example.board.controller.vo.BoardVO;
-import com.example.board.domain.Board;
 import com.example.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class BoardController {
   private BoardService boardService;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardInsertDTO dto) {
+  public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardUpdateDTO dto) {
     BoardVO vo = boardService.insertBoard(dto);
     return new ResponseEntity<>(vo, HttpStatus.CREATED);
   }
@@ -32,8 +31,10 @@ public class BoardController {
   }
 
   @PutMapping("/{board-id}")
-  public ResponseEntity<BoardVO> updateBoard(@PathVariable(name = "board-id") Long boardId) {
-    return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+  public ResponseEntity<BoardVO> updateBoard(@PathVariable(name = "board-id") Long boardId,
+                                             @RequestBody BoardUpdateDTO dto) {
+    BoardVO vo = boardService.updateBoard(boardId, dto);
+    return new ResponseEntity<>(vo, HttpStatus.ACCEPTED);
   }
 
   @DeleteMapping("/{board-id}")
