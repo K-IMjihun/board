@@ -1,6 +1,7 @@
 package com.example.board.domain;
 
 import com.example.board.controller.dto.UserInsertDTO;
+import com.example.board.domain.common.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ import javax.persistence.*;
 )
 @Getter
 @NoArgsConstructor
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
