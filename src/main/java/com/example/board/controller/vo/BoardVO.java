@@ -1,5 +1,6 @@
 package com.example.board.controller.vo;
 
+import com.example.board.domain.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,12 @@ public class BoardVO {
   private LocalDate updateTime;
   private String subject;
   private String content;
+
+  public BoardVO(Board board) {
+    this.createTime = board.getCreatedAt();
+    this.updateTime = board.getModifiedAt();
+    this.subject = board.getSubject();
+    this.content = board.getContent();
+  }
 
 }
