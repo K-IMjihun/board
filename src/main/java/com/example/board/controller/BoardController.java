@@ -27,7 +27,8 @@ public class BoardController {
 
   @GetMapping("list")
   public ResponseEntity<List<BoardVO>> searchBoard(BoardSearchDTO dto) {
-    return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+    List<BoardVO> vo = boardService.searchBoard(dto);
+    return new ResponseEntity<>(vo, HttpStatus.ACCEPTED);
   }
 
   @PutMapping("/{board-id}")

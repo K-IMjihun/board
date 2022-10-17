@@ -1,5 +1,6 @@
 package com.example.board.service;
 
+import com.example.board.controller.dto.BoardSearchDTO;
 import com.example.board.controller.dto.BoardUpdateDTO;
 import com.example.board.controller.vo.BoardVO;
 import com.example.board.domain.Board;
@@ -7,6 +8,9 @@ import com.example.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,6 +29,14 @@ public class BoardService {
     boardRepository.save(board);
 
     return new BoardVO(board);
+  }
+
+  public List<BoardVO> searchBoard(BoardSearchDTO dto) {
+    List<Board> boards = boardRepository.findAllSubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
+        dto.getSubject(), dto.getContent(), dto.getUpdateDateTime());
+
+    return boards.stream().map(BoardVO::new)
+        .collect(Collectors.toList());
   }
 
   @Transactional
