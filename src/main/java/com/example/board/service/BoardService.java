@@ -35,4 +35,12 @@ public class BoardService {
     return new BoardVO(board);
   }
 
+  public void deleteBoard(Long boardId) {
+    if (boardRepository.findById(boardId).isEmpty()) {
+      throw new RuntimeException("borad not found");
+    }
+
+    boardRepository.deleteById(boardId);
+  }
+
 }
