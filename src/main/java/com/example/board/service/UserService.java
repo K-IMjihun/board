@@ -25,10 +25,8 @@ public class UserService {
     if (userRepository.findByName(dto.getName()).isPresent()) {
       throw new RuntimeException("already exists user");
     }
-
     // User 객체 생성
     User user = new User(dto);
-
     // User Save
     userRepository.save(user);
 

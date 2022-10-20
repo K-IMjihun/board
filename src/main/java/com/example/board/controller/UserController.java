@@ -14,12 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
-/* 여기로 들어오는 API주소를 /api/v1/user로 받겠다
+/* 요청 API주소를 /api/v1/users 로 받겠다
  * 생성 -> PostMapping -> RequestBody
  * 조회 -> GetMapping -> Parameter
  * 수정 -> PutMapping -> RequestBody
  * 삭제 -> DeleteMapping -> pathVariable
  * */
+//컨트롤러 : 요청을 받으면 dto를 통해 서비스에게 요청 전송
 public class  UserController { // 컨트롤러 역할 : 사용자의 요청을 받거나, 사용자에게 데이터를 전달해줌
 
     @Autowired
