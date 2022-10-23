@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInsertDTO { // DTO: Data Transfer Object
+public class UserInsertDTO {
     private String name;
 }

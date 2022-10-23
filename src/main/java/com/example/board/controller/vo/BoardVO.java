@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data // Getter, Setter, RequiredArgsConstructor
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 필드 전체를 가지고 있는 생성자
-public class BoardVO {
+public class BoardVO { //실제값 저장, 불변
 
   private Long boardId;
   private LocalDate createTime;
