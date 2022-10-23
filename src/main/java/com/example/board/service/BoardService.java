@@ -5,6 +5,7 @@ import com.example.board.controller.dto.BoardUpdateDTO;
 import com.example.board.controller.vo.BoardVO;
 import com.example.board.domain.Board;
 import com.example.board.repository.BoardRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
-//읽기전용모드 R만 실행, CUD예방 및 성능향상
+//@Transactional : 요청에 하나라도 잘못된 응답 발생 시 모든 작업들을 원상태로 돌림
+//readOnly = true : 읽기전용모드 R만 실행, CUD예방 및 성능향상
 public class BoardService {
 
   @Autowired
@@ -42,8 +45,9 @@ public class BoardService {
 
   // 미완성
   public List<BoardVO> searchBoard(BoardSearchDTO dto) {
-    List<Board> boards = boardRepository.findAllBySubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
-        dto.getSubject(), dto.getContent(), dto.getUpdateDateTime());
+    log.info("검색어: {}", dto.getSearchWords());
+    List<Board> boards = boardRepository.findAllBySubjectContainsIgnoreCaseOrContentContainsIgnoreCase(
+        dto.getSearchWords(), dto.getSearchWords());
 
     return boards.stream().map(BoardVO::new)
         .collect(Collectors.toList());
@@ -63,7 +67,6 @@ public class BoardService {
   }
 
   @Transactional
-  //요청에 하나라도 잘못된 응답 발생 시 모든 작업들을 원상태로 돌림
   public void deleteBoard(Long boardId) {
     if (boardRepository.findById(boardId).isEmpty()) {
       throw new RuntimeException("borad not found");
