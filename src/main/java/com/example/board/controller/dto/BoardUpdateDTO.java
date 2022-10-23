@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BoardUpdateDTO {
 
+  private String username;
   private String subject;
   private String content;
 
