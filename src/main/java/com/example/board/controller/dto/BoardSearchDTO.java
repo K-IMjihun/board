@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardSearchDTO extends DateSearchDTO {
-
-  private String subject;
-  private String content;
-
+public class BoardSearchDTO { // DTO: Data Transfer Object
+  private String searchWords;
 }
