@@ -4,7 +4,9 @@ import com.example.board.controller.dto.BoardSearchDTO;
 import com.example.board.controller.dto.BoardUpdateDTO;
 import com.example.board.controller.vo.BoardVO;
 import com.example.board.domain.Board;
+import com.example.board.domain.User;
 import com.example.board.repository.BoardRepository;
+import com.example.board.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +25,16 @@ public class BoardService {
   @Autowired
   //필요한 의존객체 타입(생성자, setter, 필드일 경우)에 해당하는 빈 값을 찾아 주입
   private BoardRepository boardRepository;
+  @Autowired
+  private UserRepository userRepository;
 
   @Transactional
   public BoardVO insertBoard(BoardUpdateDTO dto) {
+    User user = userRepository.findByName(dto.getUsername())
+        .orElseThrow(() -> new RuntimeException("user not found"));
+
     Board board = Board.builder()
+        .user(user)
         .subject(dto.getSubject())
         .content(dto.getContent())
         .build();
