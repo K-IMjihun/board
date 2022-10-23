@@ -10,7 +10,16 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-  List<Board> findAllBySubjectContainsOrContentContainsOrModifiedAtIsLessThanEqual(
-      String subject, String content, LocalDate modifiedAt);
+  /**
+   *
+   * select count(*)
+   * from board
+   * where subject like '%검색어%'
+   * or content like '%검색어%';
+   *
+   */
+
+  List<Board> findAllBySubjectContainsIgnoreCaseOrContentContainsIgnoreCase(String subject, String content);
+
 
 }
