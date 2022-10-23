@@ -3,10 +3,7 @@ package com.example.board.domain;
 import com.example.board.domain.common.BaseTimeEntity;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -23,5 +20,9 @@ public class Board extends BaseTimeEntity {
   private String subject;
   @Setter
   private String content;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
+  private User user;
 
 }
